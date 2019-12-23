@@ -14,10 +14,7 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
-app.use(bodyParser.json())
 
 app.use('/public', express.static('public'));
 
@@ -45,7 +42,7 @@ app.post('/user/login', urlencodedParser, function (req, res) {
         password: req.body.password
     };
 
-    console.log('登录--',response);
+    // console.log(response);
     res.end(JSON.stringify({
         message: "获取token成功", code: 1, data: {
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTc2ODM1Mjk3LCJleHAiOjE1NzY5MjE2OTd9.k30cIlhoYs-4o3-TvKYB0fNHo3r3KV_oZz5ccdDFz08"
@@ -69,7 +66,7 @@ app.get('/user/info', urlencodedParser, function (req, res) {
     res.end(JSON.stringify(response));
 })
 app.post('/goods/putinstorage', urlencodedParser, function (req, res) {
-    console.log('req------', req);
+
     // 输出 JSON 格式
     var response = {
         goodName: req.body.goodName,//商品名称
@@ -82,7 +79,14 @@ app.post('/goods/putinstorage', urlencodedParser, function (req, res) {
 
     console.log('------',response);
     res.end(JSON.stringify({
-        message: "新增成功", code: 1, data: response
+        message: "新增成功", code: 1, data: {
+            goodName: req.body.goodName,//商品名称
+            totelWeight: req.body.totelWeight,//总重量
+            weightUnits: req.body.weightUnits,//重量单位
+            iUnitPrice: req.body.iUnitPrice,//入库单价
+            iDate: req.body.iDate,//入库时间
+            desc: req.body.desc,//备注
+        }
     }));
 })
 

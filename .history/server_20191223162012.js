@@ -14,10 +14,7 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
-app.use(bodyParser.json())
 
 app.use('/public', express.static('public'));
 
@@ -45,7 +42,7 @@ app.post('/user/login', urlencodedParser, function (req, res) {
         password: req.body.password
     };
 
-    console.log('登录--',response);
+    // console.log(response);
     res.end(JSON.stringify({
         message: "获取token成功", code: 1, data: {
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTc2ODM1Mjk3LCJleHAiOjE1NzY5MjE2OTd9.k30cIlhoYs-4o3-TvKYB0fNHo3r3KV_oZz5ccdDFz08"

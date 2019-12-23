@@ -14,10 +14,7 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-app.use(bodyParser.urlencoded({ extended: false }))
 
-// parse application/json
-app.use(bodyParser.json())
 
 app.use('/public', express.static('public'));
 
